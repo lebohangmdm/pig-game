@@ -60,3 +60,31 @@ btnRoll.addEventListener('click', function () {
     }
   }
 });
+
+btnHold.addEventListener('click', function () {
+  if (playing) {
+    //a) increment
+    scores[activePlayer] += currentScore;
+
+    document.getElementById(`score--${activePlayer}`).textContent =
+      scores[activePlayer];
+
+    //b) Check if player's score is >= 100
+    if (scores[activePlayer] >= 100) {
+      playing = false;
+      diceEl.classList.add('hidden');
+
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.add('player--winner');
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.remove('player--active');
+    } else {
+      //c) Switch to the next player
+      switchPlayer();
+    }
+  }
+});
+
+btnNew.addEventListener('click', init);
